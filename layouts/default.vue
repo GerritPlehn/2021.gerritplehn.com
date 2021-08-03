@@ -9,8 +9,8 @@
 <style>
 :root {
   --color: #243746;
-  --color-primary: #158876;
-  --color-secondary: #0e2233;
+  --color-primary: #f87171;
+  --color-secondary: #dc2626;
   --bg: #f3f5f4;
   --bg-secondary: #fff;
   --border-color: #ddd;
@@ -18,9 +18,9 @@
 
 .dark {
   --color: #ebf4f1;
-  --color-primary: #fdf9f3;
-  --color-secondary: #ffacab;
-  --bg: #091a28;
+  --color-primary: #f87171;
+  --color-secondary: #dc2626;
+  --bg: #111827;
   --bg-secondary: #071521;
   --border-color: #0d2538;
 }

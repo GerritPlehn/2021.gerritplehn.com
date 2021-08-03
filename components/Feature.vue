@@ -6,7 +6,7 @@
       class="mx-auto"
       :src="blok.icon.filename">
     <h1 class="text-lg">{{ blok.name }}</h1>
-    <p class="text-gray-600">
+    <p class="color--secondary">
       {{ blok.description }}
     </p>
   </div>

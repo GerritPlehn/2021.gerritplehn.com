@@ -1,18 +1,21 @@
 <template>
-  <div v-editable="blok">
-    <h2 class="pt-2 pl-6 text-lg text-gray-700 italic">{{ blok.text }}</h2>
-    <ul class="flex py-6 mb-6">
+<section  v-editable="blok" class="text-gray-600 dark:text-gray-400 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <h1 class="sm:text-3xl text-2xl font-medium title-font text-center dark:text-white mb-20">{{ blok.text }}
+    </h1>
+    <ul class="flex flex-wrap -m-4">
       <li
         v-for="article in sortedArticles" :key="article._uid"
-        class="flex-auto px-6" style="min-width: 33%">
+        class="p-4 lg:w-1/3" >
         <article-teaser
           v-if="article.content"
           :article-link="article.full_slug"
           :article-content="article.content"/>
-        <p v-else class="px-4 py-2 text-white bg-red-700 text-center rounded">This content loads on save. <strong>Save the entry & reload.</strong></p>
+        <p v-else class="px-4 py-2 dark:text-white bg-red-700 text-center rounded">This content loads on save. <strong>Save the entry & reload.</strong></p>
       </li>
     </ul>
   </div>
+</section>
 </template>
  
 <script>

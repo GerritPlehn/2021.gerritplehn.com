@@ -1,10 +1,10 @@
 <template>
   <div
     v-editable="blok"
-    class="prose my-24 mx-auto">
-    <h1>{{ blok.name }}</h1>
-    <p>{{ blok.intro }}</p>
-    <div class="prose" v-dompurify-html="$md.render(blok.body)"></div>
+    class="prose text-gray-600 dark:text-gray-400 my-24 mx-auto">
+    <h1 class="text-gray-900 dark:text-white">{{ blok.name }}</h1>
+    <p class="">{{ blok.intro }}</p>
+    <div class="prose dark:prose-light" v-dompurify-html="$md.render(blok.body)"></div>
   </div>
 </template>
  
