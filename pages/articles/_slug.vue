@@ -8,13 +8,14 @@
 import Article from '~/components/Article.vue'
 import { translatedSlugs } from '~/helpers/translated_slug'
 export default {
+  name: 'ArticlePage',
   components: {
     Article,
   },
   nuxtI18n: {
     paths: {
-      de: '/artikel/:slug', // -> accessible at /fr/a-propos
-      en: '/articles/:slug', // -> accessible at /about-us (no prefix since it's the default locale)
+      en: '/articles/:slug',
+      de: '/artikel/:slug',
     },
   },
   data() {
@@ -28,7 +29,6 @@ export default {
 
       // Use the input event for instant update of content
       storyblokInstance.on('input', (event) => {
-        console.log(this.story.content)
         if (event.story.id === this.story.id) {
           this.story.content = event.story.content
         }
@@ -36,7 +36,6 @@ export default {
 
       // Use the bridge to listen the events
       storyblokInstance.on(['published', 'change'], (event) => {
-        // window.location.reload()
         this.$nuxt.$router.go({
           path: this.$nuxt.$router.currentRoute,
           force: true,
@@ -56,11 +55,9 @@ export default {
           language: context.app.i18n.locale,
         }
       )
-      console.log(article)
-      const story = article.data.story
       await context.store.dispatch(
         'i18n/setRouteParams',
-        translatedSlugs(story)
+        translatedSlugs(article.data.story)
       )
       return article.data
     } catch (res) {

@@ -28,8 +28,8 @@ export default {
   name: 'AllArticles',
   nuxtI18n: {
     paths: {
-      en: '/articles', // -> accessible at /about-us (no prefix since it's the default locale)
-      de: '/artikel', // -> accessible at /fr/a-propos
+      en: '/articles',
+      de: '/artikel',
     },
   },
   data() {

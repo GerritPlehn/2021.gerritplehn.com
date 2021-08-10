@@ -33,24 +33,24 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--bg);
   color: var(--color);
-  transition: background-color .3s;
+  transition: background-color 0.3s;
 }
 a {
-  color: var(--color-primary)
+  color: var(--color-primary);
 }
-
 </style>
 <script>
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
- 
+
 export default {
   components: {
     Header,
-    Footer
-  }
+    Footer,
+  },
 }
 </script>

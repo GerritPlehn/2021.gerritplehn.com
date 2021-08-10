@@ -17,7 +17,7 @@ export default {
       de: '/', // -> accessible at /de/
     },
   },
-  name: 'hi',
+  name: 'home',
   data() {
     return {
       story: { content: {} },
@@ -36,7 +36,6 @@ export default {
 
       // Use the bridge to listen the events
       storyblokInstance.on(['published', 'change'], (event) => {
-        // window.location.reload()
         this.$nuxt.$router.go({
           path: this.$nuxt.$router.currentRoute,
           force: true,
@@ -46,9 +45,10 @@ export default {
   },
   async fetch(context) {
     // Loading reference data - Articles in our case
+    const articleStore = context.store.state.articles
     if (
-      context.store.state.articles.loaded !== '1' ||
-      context.store.state.articles.articles[0].lang !== context.app.i18n.locale
+      articleStore.loaded !== '1' ||
+      articleStore.articles[0].lang !== context.app.i18n.locale
     ) {
       let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, {
         starts_with:
@@ -64,10 +64,6 @@ export default {
   asyncData(context) {
     const version =
       context.query._storyblok || context.isDev ? 'draft' : 'published'
-    const fullSlug =
-      context.route.path == '/' || context.route.path == ''
-        ? 'home'
-        : context.route.path
 
     // Load the JSON from the API - loadig the home content (index page)
     return context.app.$storyapi
