@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt dev",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -16,6 +16,7 @@
     "@vue/composition-api": "^1.0.5",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
+    "nuxt-i18n": "^6.28.0",
     "storyblok-nuxt": "^2.0.1",
     "vue-dompurify-html": "^2.3.0"
   },
