@@ -8,7 +8,7 @@
       <span class="ml-3 text-xl">Gerrit Plehn</span>
     </nuxt-link>
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base uppercase justify-center">
-      <nuxt-link class="mr-5 hover:text-white" :to="localePath('/articles')">{{$t('articles')}}</nuxt-link>
+      <nuxt-link class="mr-5 hover:text-white" :to="localePath('/blog')">{{$t('posts')}}</nuxt-link>
     </nav>
     <nuxt-link
       v-for="locale in availableLocales"

@@ -10,13 +10,8 @@
 </template>
 
 <script>
+import { translatedSlugs } from '~/helpers/translated_slug'
 export default {
-  nuxtI18n: {
-    paths: {
-      en: '/', // -> accessible at /
-      de: '/', // -> accessible at /de/
-    },
-  },
   name: 'home',
   data() {
     return {
@@ -43,35 +38,32 @@ export default {
       })
     })
   },
-  async fetch(context) {
-    // Loading reference data - Articles in our case
-    const articleStore = context.store.state.articles
-    if (
-      articleStore.loaded !== '1' ||
-      articleStore.articles[0].lang !== context.app.i18n.locale
-    ) {
-      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, {
-        starts_with:
-          context.app.i18n.locale === 'en'
-            ? ''
-            : context.app.i18n.locale + '/' + 'articles/', // not using language parameter because that alters the full_slug
-        version: 'draft',
-      })
-      context.store.commit('articles/setArticles', articlesRefRes.data.stories)
-      context.store.commit('articles/setLoaded', '1')
-    }
-  },
+
   asyncData(context) {
     const version =
       context.query._storyblok || context.isDev ? 'draft' : 'published'
-
+    let fullSlug, lang
+    let segments = context.route.path.split('/').filter((e) => e !== '')
+    if (context.i18n.locales.map((l) => l.code).indexOf(segments[0]) !== -1) {
+      lang = segments[0]
+      segments = segments.slice(1)
+    }
+    fullSlug = segments.join('/')
+    if (segments.length === 0) fullSlug = 'home'
     // Load the JSON from the API - loadig the home content (index page)
+
     return context.app.$storyapi
-      .get(`cdn/stories/home`, {
+      .get(`cdn/stories/${fullSlug}`, {
         version: version,
-        language: context.app.i18n.locale,
+        language: lang,
       })
-      .then((res) => {
+      .then(async (res) => {
+        if (res.data.story.translated_slugs) {
+          await context.store.dispatch(
+            'i18n/setRouteParams',
+            translatedSlugs(res.data.story)
+          )
+        }
         return res.data
       })
       .catch((res) => {
@@ -79,7 +71,7 @@ export default {
           console.error(res)
           context.error({
             statusCode: 404,
-            message: 'Failed to receive content form api',
+            message: 'Failed to receive content from api',
           })
         } else {
           console.error(res.response.data)

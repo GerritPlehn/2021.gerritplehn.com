@@ -19,7 +19,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vue-dompurify'],
+  plugins: ['~/plugins/vue-dompurify', '~/plugins/components'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -36,7 +36,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/markdownit',
-    'nuxt-i18n',
+    '@nuxtjs/i18n',
     [
       'storyblok-nuxt',
       {
@@ -50,7 +50,6 @@ export default {
   axios: {},
 
   i18n: {
-    strategy: 'prefix_except_default',
     defaultLocale: 'en',
     locales: [
       {
@@ -66,18 +65,22 @@ export default {
       fallbackLocale: 'en',
       messages: {
         en: {
-          articles: 'articles',
-          all_articles: 'All Articles',
+          posts: 'posts',
+          all_posts: 'All Posts',
         },
         de: {
-          articles: 'Artikel',
-          all_articles: 'Alle Artikel',
+          posts: 'Artikel',
+          all_posts: 'Alle Artikel',
         },
       },
     },
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    babel: {
+      plugins: [['@babel/plugin-proposal-private-property-in-object', { loose: true }]],
+    }
+  },
   markdownit: {
     runtime: true, // Support `$md()`
     // preset: 'default',

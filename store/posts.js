@@ -1,11 +1,11 @@
 export const state = () => ({
-  articles: [],
+  posts: [],
   loaded: '0',
 })
 
 export const mutations = {
-  setArticles(state, entries) {
-    state.articles = entries
+  setPosts(state, entries) {
+    state.posts = entries
   },
   setLoaded(state, loaded) {
     state.loaded = loaded

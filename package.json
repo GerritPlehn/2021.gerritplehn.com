@@ -11,12 +11,12 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/color-mode": "^2.1.0",
+    "@nuxtjs/i18n": "^7.0.1",
     "@nuxtjs/markdownit": "^2.0.0",
     "@tailwindcss/typography": "^0.4.1",
     "@vue/composition-api": "^1.0.5",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
-    "nuxt-i18n": "^6.28.0",
     "storyblok-nuxt": "^2.0.1",
     "vue-dompurify-html": "^2.3.0"
   },
