@@ -42,13 +42,13 @@ export default {
     const postStore = this.$nuxt.context.store.state.posts
     if (
       postStore.loaded !== '1' ||
-      postStore.posts[0].lang !== this.$nuxt.context.app.i18n.locale
+      postStore.posts[0].lang !== this.$nuxt.context.store.state.locales.currentLocale
     ) {
       let postsRefRes = await this.$nuxt.context.app.$storyapi.get(`cdn/stories/`, {
         starts_with:
-          (this.$nuxt.context.app.i18n.locale === 'en'
+          (this.$nuxt.context.store.state.locales.currentLocale === 'default'
             ? ''
-            : this.$nuxt.context.app.i18n.locale + '/') + 'blog/', // not using language parameter because that alters the full_slug
+            : this.$nuxt.context.store.state.locales.currentLocale + '/') + 'blog/', // not using language parameter because that alters the full_slug
         content_type: 'blog-post',
         version: 'draft',
       })

@@ -49,16 +49,18 @@ export default {
   async fetch() {
     // Loading reference data - Posts in our case
     const postStore = this.$nuxt.context.store.state.posts
+    const version =
+      this.$nuxt.context.query._storyblok || this.$nuxt.context.isDev ? 'draft' : 'published'
     if (
       postStore.loaded !== '1' ||
-      postStore.posts[0].lang !== this.$nuxt.context.app.i18n.locale
+      postStore.posts[0].lang !== this.$nuxt.context.store.states.locales.currentLocale
     ) {
       let postsRefRes = await this.$nuxt.context.app.$storyapi.get(`cdn/stories/`, {
         starts_with:
-          this.$nuxt.context.app.i18n.locale === 'en'
+          this.$nuxt.context.store.state.locales.currentLocale === 'default'
             ? ''
-            : this.$nuxt.context.app.i18n.locale + '/' + 'blog/', // not using language parameter because that alters the full_slug
-        version: 'draft',
+            : this.$nuxt.context.store.state.locales.currentLocale + '/' + 'blog/', // not using language parameter because that alters the full_slug
+        version: version,
       })
       this.$nuxt.context.store.commit('posts/setPosts', postsRefRes.data.stories)
       this.$nuxt.context.store.commit('posts/setLoaded', '1')

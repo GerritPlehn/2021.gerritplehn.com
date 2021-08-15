@@ -36,7 +36,6 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/markdownit',
-    '@nuxtjs/i18n',
     [
       'storyblok-nuxt',
       {
@@ -49,32 +48,6 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
-  i18n: {
-    defaultLocale: 'en',
-    locales: [
-      {
-        code: 'de',
-        name: 'Deutsch',
-      },
-      {
-        code: 'en',
-        name: 'English',
-      },
-    ],
-    vueI18n: {
-      fallbackLocale: 'en',
-      messages: {
-        en: {
-          posts: 'posts',
-          all_posts: 'All Posts',
-        },
-        de: {
-          posts: 'Artikel',
-          all_posts: 'Alle Artikel',
-        },
-      },
-    },
-  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     babel: {
