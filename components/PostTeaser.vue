@@ -25,10 +25,10 @@
         mb-3
       "
     >
-      {{ articleContent.name }}
+      {{ postContent.name }}
     </h1>
-    <p class="leading-relaxed mb-3">{{ articleContent.intro }}</p>
-    <nuxt-link :to="articleLink" class="text-red-400 inline-flex items-center"
+    <p class="leading-relaxed mb-3">{{ postContent.intro }}</p>
+    <nuxt-link :to="postLink" class="text-red-400 inline-flex items-center"
       >Learn More
       <svg
         class="w-4 h-4 ml-2"
@@ -49,11 +49,11 @@
 <script>
 export default {
   props: {
-    articleContent: {
+    postContent: {
       type: Object,
       required: true,
     },
-    articleLink: {
+    postLink: {
       type: String,
       required: true,
     },
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style>
-.article-teaser:hover {
+.post-teaser:hover {
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
 }
 </style>
