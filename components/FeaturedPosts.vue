@@ -22,7 +22,7 @@
         >
           <post-teaser
             v-if="post.content"
-            :post-link="post.full_slug"
+            :post-link="'/' + post.full_slug"
             :post-content="post.content"
           />
           <p
@@ -53,7 +53,7 @@ export default {
       this.$nuxt.context.query._storyblok || this.$nuxt.context.isDev ? 'draft' : 'published'
     if (
       postStore.loaded !== '1' ||
-      postStore.posts[0].lang !== this.$nuxt.context.store.states.locales.currentLocale
+      postStore.posts[0].lang !== this.$nuxt.context.store.state.locales.currentLocale
     ) {
       let postsRefRes = await this.$nuxt.context.app.$storyapi.get(`cdn/stories/`, {
         starts_with:

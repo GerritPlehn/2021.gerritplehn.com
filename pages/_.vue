@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :nav="nav" :languages="alternates" />
+    <Header :story="story" />
     <component
       v-if="story.content.component"
       :key="story.content._uid"
@@ -90,10 +90,6 @@ export default {
         })
       }
     }
-    await context.store.commit(
-      'locales/setCurrentPath',
-      storyReq.data.story.default_full_slug
-    )
     
     return storyReq.data
   },
