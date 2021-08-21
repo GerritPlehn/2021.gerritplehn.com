@@ -5,10 +5,6 @@
       <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 dark:text-white">{{ blok.headline }}
       </h1>
       <p  v-editable="blok" class="mb-8 leading-relaxed">{{blok.short}}</p>
-      <div class="flex justify-center">
-        <button class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Button</button>
-        <button class="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">Button</button>
-      </div>
     </div>
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
       <img  v-editable="blok" class="object-cover object-center rounded" alt="hero" :src="blok.image.filename">
@@ -24,6 +20,6 @@ export default {
       type: Object,
       required: true
     }
-  }
+  },
 }
 </script>

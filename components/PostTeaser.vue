@@ -28,7 +28,10 @@
       {{ postContent.name }}
     </h1>
     <p class="leading-relaxed mb-3">{{ postContent.intro }}</p>
-    <nuxt-link :to="postLink" class="text-red-400 inline-flex items-center"
+    <nuxt-link
+      :to="postLink"
+      class="inline-flex items-center"
+      :class="`text-${color}-400`"
       >Learn More
       <svg
         class="w-4 h-4 ml-2"
@@ -58,6 +61,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    color () {
+      return this.$nuxt.context.store.state.settings.colorScheme
+    }
+  }
 }
 </script>
 

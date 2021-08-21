@@ -2,13 +2,10 @@
   <section v-editable="blok" class="text-gray-600 dark:text-gray-400 body-font">
     <div class="container px-5 py-24 mx-auto">
       <ul class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <li
-          v-for="post in posts"
-          :key="post._uid"
-        >
+        <li v-for="post in posts" :key="post._uid">
           <post-teaser
             v-if="post.content"
-            :post-link="'/'+post.full_slug"
+            :post-link="'/' + post.full_slug"
             :post-content="post.content"
           />
           <p
@@ -35,20 +32,24 @@ export default {
   computed: {
     posts () {
 	    return this.$nuxt.context.store.state.posts.posts
+    },
+    color () {
+      return 'red'
     }
   },
   async fetch() {
     // Loading reference data - Posts in our case
     const postStore = this.$nuxt.context.store.state.posts
+    const settingsStore = this.$nuxt.context.store.state.settings
     if (
       postStore.loaded !== '1' ||
-      postStore.posts[0].lang !== this.$nuxt.context.store.state.locales.currentLocale
+      postStore.posts[0].lang !== settingsStore.currentLocale
     ) {
       let postsRefRes = await this.$nuxt.context.app.$storyapi.get(`cdn/stories/`, {
         starts_with:
-          (this.$nuxt.context.store.state.locales.currentLocale === 'default'
+          (settingsStore.currentLocale === 'default'
             ? ''
-            : this.$nuxt.context.store.state.locales.currentLocale + '/') + 'blog/', // not using language parameter because that alters the full_slug
+            : (settingsStore.currentLocale + '/')) + 'blog/', // not using language parameter because that alters the full_slug
         content_type: 'blog-post',
         version: 'draft',
       })

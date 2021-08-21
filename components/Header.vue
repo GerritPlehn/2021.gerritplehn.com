@@ -10,6 +10,8 @@
         md:flex-row
         items-center
       "
+
+          :class="`text-${color}-400`"
     >
       <nuxt-link
         to="/"
@@ -31,7 +33,8 @@
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          class="w-10 h-10 text-white p-2 bg-red-500 rounded-full"
+          class="w-10 h-10 text-white p-2 rounded-full"
+          :class="`bg-${color}-500`"
           viewBox="0 0 24 24"
         >
           <path
@@ -51,7 +54,7 @@
         "
       >
         <nuxt-link
-          class="mr-5 hover:text-white"
+          class="mr-5"
           v-for="link in navigation.links"
           :to="link.path"
           :key="link.path"
@@ -85,6 +88,9 @@ export default {
     }
   },
   computed: {
+    color() {
+      return this.$nuxt.context.store.state.settings.colorScheme
+    },
     availableLocales() {
       let locales = []
       if (this.story.translated_slugs) {
@@ -107,30 +113,17 @@ export default {
             : this.story.default_full_slug),
       })
       return locales.filter(
-        (l) => l.locale !== this.$nuxt.context.store.state.locales.currentLocale
+        (l) => l.locale !== this.$nuxt.context.store.state.settings.currentLocale
       )
     },
   },
   async fetch() {
-    const version =
-      this.$nuxt.context.query._storyblok || this.$nuxt.context.isDev
-        ? 'draft'
-        : 'published'
+    const settings = this.$nuxt.context.store.state.settings
 
-    const linkReq = await this.$nuxt.context.app.$storyapi.get(
-      `cdn/stories/navigation`,
-      {
-        version: version,
-        resolve_relations: 'navigation.stories',
-      }
-    )
-    const navSettings = linkReq.data.story.content
-    const currentLocale = this.$nuxt.context.store.state.locales.currentLocale
+    this.navigation.logo = settings.logo
+    this.navigation.title = settings.title
 
-    this.navigation.logo = navSettings.logo
-    this.navigation.title = navSettings.title
-
-    for (let story of navSettings.stories) {
+    for (let story of settings.navItems) {
       let navItem = {
         path:
           '/' +
@@ -138,9 +131,9 @@ export default {
         name: story.name,
       }
 
-      if (currentLocale !== 'default' && story.translated_slugs) {
+      if (settings.currentLocale !== 'default' && story.translated_slugs) {
         const locale = story.translated_slugs.filter(
-          (ts) => ts.lang === currentLocale
+          (ts) => ts.lang === settings.currentLocale
         )
         if (locale.length) {
           navItem = {
