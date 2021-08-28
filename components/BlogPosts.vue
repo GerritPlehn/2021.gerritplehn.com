@@ -41,6 +41,8 @@ export default {
     // Loading reference data - Posts in our case
     const postStore = this.$nuxt.context.store.state.posts
     const settingsStore = this.$nuxt.context.store.state.settings
+    const version =
+      context.query._storyblok || context.isDev ? 'draft' : 'published'
     if (
       postStore.loaded !== '1' ||
       postStore.posts[0].lang !== settingsStore.currentLocale
@@ -51,7 +53,7 @@ export default {
             ? ''
             : (settingsStore.currentLocale + '/')) + 'blog/', // not using language parameter because that alters the full_slug
         content_type: 'blog-post',
-        version: 'draft',
+        version: version,
       })
       this.$nuxt.context.store.commit('posts/setPosts', postsRefRes.data.stories)
       this.$nuxt.context.store.commit('posts/setLoaded', '1')
