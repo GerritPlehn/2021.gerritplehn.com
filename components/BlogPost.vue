@@ -7,7 +7,7 @@
     <p class="">{{ blok.intro }}</p>
     <div
       class="prose dark:prose-light"
-      v-dompurify-html="$md.render(blok.body)"
+      v-html="richtext(blok.body)"
     ></div>
   </div>
 </template>
@@ -20,5 +20,10 @@ export default {
       required: true,
     },
   },
+  methods: {
+    richtext(text) {
+      return this.$storyapi.richTextResolver.render(text)
+    }
+  }
 }
 </script>
