@@ -89,7 +89,10 @@ module.exports = {
         'pages/**/*.vue',
         'plugins/**/*.js',
         'nuxt.config.js'
-      ]
+      ],
+      safelist: {
+        standard: [/^text-[a-z]+-400$/, /^bg-[a-z]+-500$/]
+      }
     },
     darkMode: 'class'
   }
