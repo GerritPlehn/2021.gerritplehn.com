@@ -85,14 +85,14 @@ export default {
           resolve_relations: 'settings.nav_stories',
         }
       )
-  
+
       await context.store.commit('settings/setSettings', {
         currentLocale: lang,
         title: settingsReq.data.story.content.title,
         colorScheme: settingsReq.data.story.content.color_scheme,
         logo: settingsReq.data.story.content.logo,
-        twitter: settingsReq.data.story.content.twitter,
         navItems: settingsReq.data.story.content.nav_stories,
+        socials: settingsReq.data.story.content.socials
       })
     }
 

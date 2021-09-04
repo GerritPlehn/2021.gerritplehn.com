@@ -75,6 +75,7 @@ module.exports = {
     variants: {
       extend: {
         typography: ['dark'],
+        invert: ['dark'],
       },
     },
     plugins: [

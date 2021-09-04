@@ -5,7 +5,8 @@ export const state = () => ({
   title: null,
   logo: null,
   navItems: [],
-  loaded: false
+  loaded: false,
+  socials: []
 })
 
 export const mutations = {
@@ -26,6 +27,9 @@ export const mutations = {
   },
   setNavItems(state, navItems) {
     state.navItems = navItems
+  },
+  setSocials(state, socials) {
+    state.socials = socials
   },
   setSettings(state, options) {
     for (let setting of Object.keys(options)) {
