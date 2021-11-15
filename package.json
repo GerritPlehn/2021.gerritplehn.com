@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "eslint-config-prettier": "^8.3.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.2"
