@@ -13,7 +13,7 @@
     "@nuxtjs/color-mode": "^2.1.0",
     "@nuxtjs/markdownit": "^2.0.0",
     "@tailwindcss/typography": "^0.5.2",
-    "@vue/composition-api": "^1.4.9",
+    "@vue/composition-api": "^1.6.3",
     "core-js": "^3.21.1",
     "nuxt": "^2.15.8",
     "storyblok-nuxt": "^2.0.1",
