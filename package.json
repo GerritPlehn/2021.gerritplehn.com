@@ -17,7 +17,7 @@
     "core-js": "^3.25.0",
     "nuxt": "^2.15.8",
     "storyblok-nuxt": "^2.0.1",
-    "vue-dompurify-html": "^3.0.0"
+    "vue-dompurify-html": "^3.1.1"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.0",
