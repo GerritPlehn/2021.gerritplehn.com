@@ -1,69 +1,50 @@
-# gp-web-nuxt
+# Storyblok Default Demo
 
-## Build Setup
+This frontend is shown when creating a new example space in your [Storyblok](https://storyblok.com) account. It is built using [Nuxt 3](https://v3.nuxtjs.org/) and [TailwindCSS](https://tailwindcss.com/). Feel free to explore and reuse the code.
+
+## Setup
+
+- **Install the dependencies:**
 
 ```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+npm install
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+- **Install `mkcert` on your system:** The installation instructions for macOS, Windows and Linux can be found in the [mkcert Github repository](https://github.com/FiloSottile/mkcert).
 
-## Special Directories
+- **Change the following in your package.json:** `nuxt dev` -> `nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem`
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+- **Create a valid certificate by running the following command in your project folder:** 
 
-### `assets`
+```bash
+mkcert localhost
+```
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+- **Run your project:**
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+```bash
+npm run dev
+```
 
-### `components`
+Your project will now be served on [https://localhost:3000](https://localhost:3000).
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+Have a look at the [Nuxt 3 deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for further information.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+## Some particularities to be aware of
 
-### `layouts`
+### Access token and path via URL parameters
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+For our particular use case, we needed one deployed frontend that could be used to display a large quantity of demo spaces that are generated on the fly. Therefore, the access tokens of these spaces are passed via URL parameters. In a more typical scenario, you would probably want to hardcode the access token or store it as an environment variable (the latter being the recommended approach). The changes you have to make are documented as comments in the following files:
+- nuxt.config.js
+- layouts/default.vue
+- pages/[...slug].vue
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+### Internationalization and language detection
 
+For the purpose of being used in product demos, it has to be possible that any language can be added in the internationalization settings in Storyblok and is detected automatically in the frontend subsequently. In order to ensure this, all currently active language codes are retrieved from the Storyblok space. When fetching a particular story based on the current route, it is checked whether any of the currently active language codes matches the first part of the route. For example, if the current route was `https://localhost:3000/de/home` and German had been added as a language, `de` would get added as the language parameter in the API request for the home story. You can take a look at the [getLanguage composable](composables/getLanguage.js) to see how it works.
 
-### `pages`
+In a real-world project, you would usually know which languages are used on the website, allowing you to choose a simpler approach (e.g. a folder-based one).
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+### Setting a real path for stories
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+The main drawback of handling internationalization as described above is that field-level translation will not working when setting a real path for certain stories (e.g. `/` instead of `home`). When setting a real path, the language code is no longer part of the route, thus making it impossible to detect.

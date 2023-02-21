@@ -1,99 +1,93 @@
-/*
-** TailwindCSS Configuration File
-**
-** Docs: https://tailwindcss.com/docs/configuration
-** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
-*/
+const srcDir = '.'
+
 module.exports = {
-    theme: {
-      extend: {
-      typography: (theme) => ({
-        light: {
-          css: [
-            {
-              color: theme('colors.gray.400'),
-              '[class~="lead"]': {
-                color: theme('colors.gray.300'),
-              },
-              a: {
-                color: theme('colors.white'),
-              },
-              strong: {
-                color: theme('colors.white'),
-              },
-              'ol > li::before': {
-                color: theme('colors.gray.400'),
-              },
-              'ul > li::before': {
-                backgroundColor: theme('colors.gray.600'),
-              },
-              hr: {
-                borderColor: theme('colors.gray.200'),
-              },
-              blockquote: {
-                color: theme('colors.gray.200'),
-                borderLeftColor: theme('colors.gray.600'),
-              },
-              h1: {
-                color: theme('colors.white'),
-              },
-              h2: {
-                color: theme('colors.white'),
-              },
-              h3: {
-                color: theme('colors.white'),
-              },
-              h4: {
-                color: theme('colors.white'),
-              },
-              'figure figcaption': {
-                color: theme('colors.gray.400'),
-              },
-              code: {
-                color: theme('colors.white'),
-              },
-              'a code': {
-                color: theme('colors.white'),
-              },
-              pre: {
-                color: theme('colors.gray.200'),
-                backgroundColor: theme('colors.gray.800'),
-              },
-              thead: {
-                color: theme('colors.white'),
-                borderBottomColor: theme('colors.gray.400'),
-              },
-              'tbody tr': {
-                borderBottomColor: theme('colors.gray.600'),
-              },
-            },
-          ],
-        },
-      }),
-      }
-    },
-    variants: {
-      extend: {
-        typography: ['dark'],
-        invert: ['dark'],
+  content: [
+    'storyblok/**/*.{vue,js}',
+    'pages/**/*.vue',
+    `${srcDir}/components/**/*.{vue,js,ts}`,
+    `${srcDir}/layouts/**/*.vue`,
+    `${srcDir}/pages/**/*.vue`,
+    `${srcDir}/composables/**/*.{js,ts}`,
+    `${srcDir}/plugins/**/*.{js,ts}`,
+    `${srcDir}/App.{js,ts,vue}`,
+    `${srcDir}/app.{js,ts,vue}`,
+    `${srcDir}/Error.{js,ts,vue}`,
+    `${srcDir}/error.{js,ts,vue}`,
+  ],
+  safelist: [
+    'bg-primary',
+    'bg-secondary',
+    'bg-tertiary',
+    'bg-medium',
+    'bg-dark',
+    'bg-white',
+    'bg-light',
+    'hover:bg-primary',
+    'hover:bg-secondary',
+    'hover:bg-tertiary',
+    'hover:bg-medium',
+    'hover:bg-dark',
+    'hover:bg-white',
+    'hover:bg-light',
+    'text-primary',
+    'text-secondary',
+    'text-tertiary',
+    'text-medium',
+    'text-dark',
+    'text-white',
+    'text-light',
+    'hover:text-primary',
+    'hover:text-secondary',
+    'hover:text-tertiary',
+    'hover:text-medium',
+    'hover:text-dark',
+    'hover:text-white',
+    'hover:text-light',
+    'border-primary',
+    'border-secondary',
+    'border-tertiary',
+    'border-medium',
+    'border-dark',
+    'border-white',
+    'border-light',
+    'items-start',
+    'items-center',
+    'items-end',
+  ],
+  theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        lg: '2rem',
       },
     },
-    plugins: [
-      require('@tailwindcss/typography')
-    ],
-    purge: {
-      // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
-      enabled: process.env.NODE_ENV === 'production',
-      content: [
-        'components/**/*.vue',
-        'layouts/**/*.vue',
-        'pages/**/*.vue',
-        'plugins/**/*.js',
-        'nuxt.config.js'
-      ],
-      safelist: {
-        standard: [/^text-[a-z]+-400$/, /^bg-[a-z]+-500$/]
-      }
+    fontFamily: {
+      sans: 'sans-serif',
     },
-    darkMode: 'class'
-  }
+    borderRadius: {
+      none: '0',
+      sm: 'var(--rounded_sm)',
+      DEFAULT: 'var(--rounded_default)',
+      md: 'var(--rounded_md)',
+      lg: 'var(--rounded_lg)',
+      xl: 'var(--rounded_xl)',
+      '2xl': 'var(--rounded_2xl)',
+      '3xl': 'var(--rounded_3xl)',
+      full: 'var(--rounded_full)',
+    },
+    extend: {
+      colors: {
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        medium: 'var(--medium)',
+        light: 'var(--light)',
+        dark: 'var(--dark)',
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+  ],
+}
